@@ -1,0 +1,26 @@
+{
+  "name": "stars",
+  "version": "1.0.0",
+  "description": "Supabase demo",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node tooling/dev.js",
+    "build": "node tooling/build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smhutch/stars.git"
+  },
+  "author": "SMHutch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smhutch/stars/issues"
+  },
+  "homepage": "https://github.com/smhutch/stars#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^1.22.5"
+  },
+  "devDependencies": {
+    "esbuild": "^0.12.26"
+  }
+}
