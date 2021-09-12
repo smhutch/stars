@@ -91,6 +91,27 @@ button:hover:focus:not(:focus-visible) {
   box-shadow: none;
   transform: translateY(1px);
 }
+
+button.link {
+  /*
+    Used to make a button look like a link.
+    Note that anchor tags should always be used for cross-page navigation,
+    but this works for our SPA demo.
+  */
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: pointer;
+  font-weight: normal;
+  outline-offset: var(--space-1);
+  padding: 0;
+}
+
+button.link:hover {
+  text-decoration: underline;
+}
+
 /*
 * === Forms ===
 */
