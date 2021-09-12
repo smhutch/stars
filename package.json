@@ -7,6 +7,7 @@
     "build": "node tooling/build.js",
     "dev": "node tooling/dev.js",
     "lint": "eslint src/*.js"
+    "typecheck": "tsc"
   },
   "repository": {
     "type": "git",
