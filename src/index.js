@@ -3,11 +3,24 @@ import { getProducts } from "./products";
 import { getReviews } from "./reviews";
 import { renderAddReviewDialog } from "./form";
 
-// TODO: Handle these failing
+/**
+ * Might be null, but for this demo we won't handle that case.
+ *
+ * @type {HTMLElement}
+ */
 const productsSection = document.getElementById("products");
-const productsList = productsSection.querySelector("ul");
+
+/**
+ * Might be null, but for this demo we won't handle that case.
+ *
+ * @type {HTMLElement}
+ */
 const reviewsSection = document.getElementById("reviews");
 
+/**
+ * @param {import("./reviews").Review} review
+ * @returns {HTMLLIElement}
+ */
 const toReviewListItem = ({ rating, review }) => {
   const ratingEl = document.createElement("strong");
   ratingEl.innerText = rating;
@@ -22,6 +35,10 @@ const toReviewListItem = ({ rating, review }) => {
   return li;
 };
 
+/**
+ * @param {import("./products").Product} product
+ * @returns void
+ */
 const renderReviewList = async (product) => {
   clearElement(reviewsSection);
 
@@ -51,7 +68,12 @@ const renderReviewList = async (product) => {
   reviews.map(toReviewListItem).forEach((li) => ul.appendChild(li));
 };
 
-const renderProductButton = (product) => {
+/**
+ *
+ * @param {import("./products").Product} product
+ * @returns {HTMLLIElement}
+ */
+const toProductButtonListItem = (product) => {
   const button = document.createElement("button");
 
   button.addEventListener("click", () => {
@@ -63,12 +85,16 @@ const renderProductButton = (product) => {
 
   const li = document.createElement("li");
   li.appendChild(button);
-  productsList.appendChild(li);
+
+  return li;
 };
 
 const renderProductList = async () => {
+  const ul = document.createElement("ul");
+  productsSection.appendChild(ul);
+
   const products = await getProducts();
-  products.forEach(renderProductButton);
+  products.map(toProductButtonListItem).forEach((li) => ul.appendChild(li));
 };
 
 const init = () => {
