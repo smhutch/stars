@@ -5,31 +5,54 @@ import { getReviews } from "./reviews";
 const productsSection = document.getElementById("products");
 const productsList = productsSection.querySelector("ul");
 const reviewsSection = document.getElementById("reviews");
-const reviewsHeading = reviewsSection.querySelector("h2");
 const reviewsList = reviewsSection.querySelector("ul");
 
-const renderReview = ({ rating, review }) => {
+const clearElement = (element) => {
+  element.innerHTML = "";
+};
+
+const toReviewListItem = ({ rating, review }) => {
   const ratingEl = document.createElement("strong");
   ratingEl.innerText = rating;
 
   const reviewEl = document.createElement("span");
+  reviewEl.classList.add("dim");
   reviewEl.innerText = review;
 
   const li = document.createElement("li");
   li.appendChild(ratingEl);
   li.appendChild(reviewEl);
-  reviewsList.appendChild(li);
-};
-
-const clearReviewList = () => {
-  reviewsList.innerHTML = "";
+  return li;
 };
 
 const renderReviewList = async (product) => {
+  clearElement(reviewsSection);
+
+  const productNameHeading = document.createElement("h2");
+  productNameHeading.innerText = product.name;
+  reviewsSection.appendChild(productNameHeading);
+
+  // TODO: Retrieve average review score from server
+  // TODO: render average review score inside flex element
+
+  const addReviewButton = document.createElement("button");
+  addReviewButton.innerText = "Add Review";
+  // TODO: open dialog when clicked
+  addReviewButton.addEventListener("click", console.log);
+  reviewsSection.appendChild(addReviewButton);
+
+  const divider = document.createElement("hr");
+  reviewsSection.appendChild(divider);
+
+  const reviewsHeading = document.createElement("h3");
+  reviewsHeading.innerText = "Reviews";
+  reviewsSection.appendChild(reviewsHeading);
+
+  const ul = document.createElement("ul");
+  reviewsSection.appendChild(ul);
+
   const reviews = await getReviews(product.id);
-  reviewsHeading.innerText = product.name;
-  clearReviewList();
-  reviews.forEach(renderReview);
+  reviews.map(toReviewListItem).forEach((li) => ul.appendChild(li));
 };
 
 const renderProductButton = (product) => {
@@ -39,6 +62,7 @@ const renderProductButton = (product) => {
     renderReviewList(product);
   });
 
+  button.classList.add("link");
   button.innerText = product.name;
 
   const li = document.createElement("li");
