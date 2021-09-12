@@ -82,6 +82,15 @@ button:hover {
   box-shadow: 0 2px 8px 0px var(--color-shadow);
 }
 
+button:focus-visible {
+  /* Remove the default browser outline, but add a suitable alternative  */
+  outline: 2px solid var(--color-primary);
+}
+
+button:hover:focus:not(:focus-visible) {
+  box-shadow: none;
+  transform: translateY(1px);
+}
 /*
 * === Forms ===
 */
