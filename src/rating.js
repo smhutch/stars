@@ -30,3 +30,15 @@ export const enforceValidRating = (rating) => {
 
   return rating;
 };
+
+/**
+ *
+ * @param {number[]} ratings
+ * @returns {number}
+ */
+export const getAverageRating = (ratings) => {
+  const ratingsCount = ratings.length;
+  const totalRating = ratings.reduce((acc, rating) => acc + rating, 0);
+
+  return totalRating / ratingsCount;
+};

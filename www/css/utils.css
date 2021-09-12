@@ -1,3 +1,11 @@
 .dim {
   color: var(--text-dim);
 }
+
+.flex {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+}

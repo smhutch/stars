@@ -2,7 +2,7 @@ import { clearElement } from "./utils";
 import { getProducts } from "./products";
 import { getReviews } from "./reviews";
 import { renderAddReviewDialog } from "./form";
-import { enforceValidRating } from "./rating";
+import { enforceValidRating, getAverageRating } from "./rating";
 
 const productsSection = document.getElementById("products");
 if (!productsSection) {
@@ -33,6 +33,55 @@ const toReviewListItem = ({ rating, review }) => {
 };
 
 /**
+ * @param {number} rating
+ * @returns {HTMLDivElement}
+ */
+const getStarsEl = (rating) => {
+  const el = document.createElement("div");
+  // TODO: replace with stars UI
+  el.innerText = `Stars: ${enforceValidRating(rating)}`;
+  return el;
+};
+
+/**
+ * @param {number} rating
+ * @returns {HTMLDivElement}
+ */
+const getAverageRatingEl = (rating) => {
+  const wrapper = document.createElement("div");
+
+  // Average rating
+  const averageEl = document.createElement("span");
+  averageEl.innerText = String(rating);
+
+  // Stars (rounded to nearest half star)
+  const starsEl = getStarsEl(rating);
+
+  wrapper.append(averageEl, starsEl);
+  return wrapper;
+};
+
+/**
+ * @param {number} rating
+ * @returns {HTMLDivElement}
+ */
+const getRatingSummaryEl = (rating) => {
+  // Wrapper flexbox div
+  const reviewSummaryEl = document.createElement("div");
+  reviewSummaryEl.classList.add("flex", "justify-between");
+
+  const averageRatingEl = getAverageRatingEl(rating);
+
+  const addReviewButton = document.createElement("button");
+  addReviewButton.innerText = "Add Review";
+  addReviewButton.addEventListener("click", () => renderAddReviewDialog());
+
+  reviewSummaryEl.append(averageRatingEl, addReviewButton);
+
+  return reviewSummaryEl;
+};
+
+/**
  * @param {import("./products").Product} product
  * @returns void
  */
@@ -43,25 +92,29 @@ const renderReviewList = async (product) => {
   productNameHeading.innerText = product.name;
   reviewsSection.appendChild(productNameHeading);
 
-  // TODO: Retrieve average review score from server
-  // TODO: render average review score inside flex element
+  const reviews = await getReviews(product.id);
 
-  const addReviewButton = document.createElement("button");
-  addReviewButton.innerText = "Add Review";
-  addReviewButton.addEventListener("click", () => renderAddReviewDialog());
-  reviewsSection.appendChild(addReviewButton);
+  if (reviews.length === 0) {
+    const emptyEl = document.createElement("p");
+    emptyEl.innerText = "No reviews yet";
+    emptyEl.classList.add("dim");
+
+    reviewsSection.appendChild(emptyEl);
+    return;
+  }
+
+  const ratings = reviews.map((review) => review.rating);
+  const ratingSummaryEl = getRatingSummaryEl(getAverageRating(ratings));
 
   const divider = document.createElement("hr");
-  reviewsSection.appendChild(divider);
 
   const reviewsHeading = document.createElement("h3");
   reviewsHeading.innerText = "Reviews";
-  reviewsSection.appendChild(reviewsHeading);
 
   const ul = document.createElement("ul");
-  reviewsSection.appendChild(ul);
 
-  const reviews = await getReviews(product.id);
+  reviewsSection.append(ratingSummaryEl, divider, reviewsHeading, ul);
+
   reviews.map(toReviewListItem).forEach((li) => ul.appendChild(li));
 };
 
