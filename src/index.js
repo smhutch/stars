@@ -1,15 +1,12 @@
+import { clearElement } from "./utils";
 import { getProducts } from "./products";
 import { getReviews } from "./reviews";
+import { renderAddReviewDialog } from "./form";
 
 // TODO: Handle these failing
 const productsSection = document.getElementById("products");
 const productsList = productsSection.querySelector("ul");
 const reviewsSection = document.getElementById("reviews");
-const reviewsList = reviewsSection.querySelector("ul");
-
-const clearElement = (element) => {
-  element.innerHTML = "";
-};
 
 const toReviewListItem = ({ rating, review }) => {
   const ratingEl = document.createElement("strong");
@@ -37,8 +34,7 @@ const renderReviewList = async (product) => {
 
   const addReviewButton = document.createElement("button");
   addReviewButton.innerText = "Add Review";
-  // TODO: open dialog when clicked
-  addReviewButton.addEventListener("click", console.log);
+  addReviewButton.addEventListener("click", () => renderAddReviewDialog());
   reviewsSection.appendChild(addReviewButton);
 
   const divider = document.createElement("hr");
