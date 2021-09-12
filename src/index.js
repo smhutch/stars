@@ -3,19 +3,15 @@ import { getProducts } from "./products";
 import { getReviews } from "./reviews";
 import { renderAddReviewDialog } from "./form";
 
-/**
- * Might be null, but for this demo we won't handle that case.
- *
- * @type {HTMLElement}
- */
 const productsSection = document.getElementById("products");
+if (!productsSection) {
+  throw new Error("Element with id of 'products' was not found");
+}
 
-/**
- * Might be null, but for this demo we won't handle that case.
- *
- * @type {HTMLElement}
- */
 const reviewsSection = document.getElementById("reviews");
+if (!reviewsSection) {
+  throw new Error("Element with id of 'reviews' was not found");
+}
 
 /**
  * @param {import("./reviews").Review} review
