@@ -2,6 +2,7 @@ import { clearElement } from "./utils";
 import { getProducts } from "./products";
 import { getReviews } from "./reviews";
 import { renderAddReviewDialog } from "./form";
+import { enforceValidRating } from "./rating";
 
 const productsSection = document.getElementById("products");
 if (!productsSection) {
@@ -19,7 +20,7 @@ if (!reviewsSection) {
  */
 const toReviewListItem = ({ rating, review }) => {
   const ratingEl = document.createElement("strong");
-  ratingEl.innerText = rating;
+  ratingEl.innerText = String(enforceValidRating(rating));
 
   const reviewEl = document.createElement("span");
   reviewEl.classList.add("dim");
