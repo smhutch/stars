@@ -1,0 +1,10 @@
+form .row {
+  margin-bottom: var(--space-5);
+}
+
+form label {
+  display: block;
+  margin-bottom: var(--space-3);
+  font-size: 1.2rem;
+  font-weight: 300;
+}
