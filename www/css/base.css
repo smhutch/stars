@@ -143,5 +143,28 @@ button.link:hover {
 }
 
 /*
-* === Forms ===
+* === Stars ===
 */
+.star {
+  width: 28px;
+  height: 28px;
+}
+
+.star:not(:last-of-type) {
+  margin-right: var(--space-1);
+}
+
+/*
+* === Review summary ===
+*/
+.review-summary-average-rating {
+  font-size: 2rem;
+  margin-right: var(--space-4);
+}
+
+/*
+* === Review ===
+*/
+.review-stars {
+  margin-right: var(--space-4);
+}

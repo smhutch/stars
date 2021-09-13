@@ -2,7 +2,8 @@ import { clearElement } from "./utils";
 import { getProducts } from "./products";
 import { getReviews } from "./reviews";
 import { renderAddReviewDialog } from "./form";
-import { enforceValidRating, getAverageRating } from "./rating";
+import { getStarsEl } from "./stars";
+import { enforceValidRating, getAverageRating, RATING_MAX } from "./rating";
 
 const productsSection = document.getElementById("products");
 if (!productsSection) {
@@ -19,28 +20,23 @@ if (!reviewsSection) {
  * @returns {HTMLLIElement}
  */
 const toReviewListItem = ({ rating, review }) => {
+  const ratingStarsEl = document.createElement("strong");
+  ratingStarsEl.classList.add("review-stars");
+  ratingStarsEl.appendChild(getStarsEl(rating));
+
   const ratingEl = document.createElement("strong");
   ratingEl.innerText = String(enforceValidRating(rating));
 
   const reviewEl = document.createElement("span");
   reviewEl.classList.add("dim");
-  reviewEl.innerText = review;
+  reviewEl.innerText = `, ${review}`;
 
   const li = document.createElement("li");
-  li.appendChild(ratingEl);
-  li.appendChild(reviewEl);
-  return li;
-};
+  li.classList.add("flex", "align-center");
 
-/**
- * @param {number} rating
- * @returns {HTMLDivElement}
- */
-const getStarsEl = (rating) => {
-  const el = document.createElement("div");
-  // TODO: replace with stars UI
-  el.innerText = `Stars: ${enforceValidRating(rating)}`;
-  return el;
+  li.append(ratingStarsEl, ratingEl, reviewEl);
+
+  return li;
 };
 
 /**
@@ -49,12 +45,14 @@ const getStarsEl = (rating) => {
  */
 const getAverageRatingEl = (rating) => {
   const wrapper = document.createElement("div");
+  wrapper.classList.add("flex", "align-center");
 
   // Average rating
   const averageEl = document.createElement("span");
+  averageEl.classList.add("review-summary-average-rating");
   averageEl.innerText = String(rating);
 
-  // Stars (rounded to nearest half star)
+  // Stars
   const starsEl = getStarsEl(rating);
 
   wrapper.append(averageEl, starsEl);
