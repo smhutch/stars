@@ -1,2 +1,5 @@
 # deps
 node_modules
+
+# mac noise
+.DS_Store
