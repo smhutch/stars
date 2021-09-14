@@ -21,7 +21,6 @@ const starFillIdMap = {
 };
 
 /**
- *
  * @param {string} tag
  * @returns {SVGElement}
  */
@@ -44,7 +43,7 @@ const starSvg = createStarSvg();
 /**
  * @param {StarFill} starFill
  * */
-const getStarEl = (starFill) => {
+export const createStarEl = (starFill) => {
   const star = starSvg.cloneNode(true);
 
   const use = createSVGElement("use");
@@ -101,7 +100,7 @@ export const getStarsEl = (rating) => {
 
   const starFills = getStarFillsForRating(rating);
   starFills.forEach((starFill) => {
-    const starEl = getStarEl(starFill);
+    const starEl = createStarEl(starFill);
     div.appendChild(starEl);
   });
 

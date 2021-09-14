@@ -1,4 +1,4 @@
-import { RATING_MAX, RATING_MIN, RATING_STEP } from "./rating";
+import { createStarInput, STAR_INPUT_NAME } from "./starInput";
 import { clearElement } from "./utils";
 
 const addReviewContainer = document.getElementById("add-review");
@@ -7,7 +7,7 @@ const HEADING_ID = "add-review-heading";
 const HEADING_TEXT = "Add a review";
 
 const RATING_INPUT_ID = "rating-input";
-const RATING_NAME = "rating";
+const RATING_NAME = STAR_INPUT_NAME;
 
 const REVIEW_INPUT_ID = "review-input";
 const REVIEW_NAME = "review";
@@ -45,14 +45,7 @@ const createAddReviewForm = () => {
   ratingLabel.innerText = "Rating";
   ratingFormRow.appendChild(ratingLabel);
 
-  const ratingInput = document.createElement("input");
-  ratingInput.setAttribute("id", RATING_INPUT_ID);
-  ratingInput.setAttribute("name", RATING_NAME);
-  ratingInput.setAttribute("type", "number");
-  ratingInput.setAttribute("min", RATING_MIN);
-  ratingInput.setAttribute("max", RATING_MAX);
-  ratingInput.setAttribute("step", RATING_STEP);
-  ratingInput.setAttribute("required", true);
+  const ratingInput = createStarInput();
   ratingFormRow.appendChild(ratingInput);
 
   form.appendChild(ratingFormRow);
@@ -70,7 +63,7 @@ const createAddReviewForm = () => {
   reviewInput.setAttribute("name", REVIEW_NAME);
   reviewInput.setAttribute("type", "text");
   reviewInput.setAttribute("placeholder", "Start typing...");
-  reviewInput.setAttribute("required", true);
+  reviewInput.setAttribute("required", "true");
   reviewFormRow.appendChild(reviewInput);
 
   form.appendChild(reviewFormRow);

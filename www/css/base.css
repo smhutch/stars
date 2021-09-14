@@ -4,6 +4,9 @@
   --color-shadow: #dddddd;
   --text-dim: #797874;
   --text-base: #000000;
+  --star-empty: #e0e0e0;
+  --star-full: #fece6e;
+  --star-focus: #f1be59;
   --space-0: 0px;
   --space-1: 4px;
   --space-2: 8px;
@@ -92,6 +95,10 @@ label {
   font-weight: normal;
 }
 
+input {
+  font-size: 1rem;
+}
+
 /*
 * === Buttons ===
 */
@@ -152,6 +159,49 @@ button.link:hover {
 
 .star:not(:last-of-type) {
   margin-right: var(--space-1);
+}
+
+/*
+* === Star input ===
+*/
+.star-input {
+  display: inline-flex;
+}
+
+.star-input label {
+  cursor: pointer;
+}
+
+.star-input svg {
+  padding: var(--space-1);
+}
+
+.star-input svg use {
+  color: var(--star-empty);
+}
+
+/* When hovering over the star row, all stars should appear full */
+.star-input:hover svg use {
+  fill: var(--star-full);
+}
+
+/* All stars after the hovered one should appear empty */
+.star-input .star-input-option:hover ~ .star-input-option svg use {
+  fill: var(--star-empty);
+}
+
+/*
+  All inputs with a `selected` class should appear full
+  Note: this class is dynamically added by the star input JS.
+*/
+.star-input input.selected + label svg use {
+  fill: var(--star-full);
+}
+
+/* When focusing or hovering a star, make it slightly darker than the full color */
+.star-input input:hover + label svg use,
+.star-input input:focus + label svg use {
+  fill: var(--star-focus);
 }
 
 /*

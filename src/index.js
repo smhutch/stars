@@ -3,7 +3,7 @@ import { getProducts } from "./products";
 import { getReviews } from "./reviews";
 import { renderAddReviewDialog } from "./form";
 import { getStarsEl } from "./stars";
-import { enforceValidRating, getAverageRating, RATING_MAX } from "./rating";
+import { enforceValidRating, getAverageRating } from "./rating";
 
 const productsSection = document.getElementById("products");
 if (!productsSection) {
@@ -35,7 +35,6 @@ const toReviewListItem = ({ rating, review }) => {
   li.classList.add("flex", "align-center");
 
   li.append(ratingStarsEl, ratingEl, reviewEl);
-
   return li;
 };
 
@@ -75,7 +74,6 @@ const getRatingSummaryEl = (rating) => {
   addReviewButton.addEventListener("click", () => renderAddReviewDialog());
 
   reviewSummaryEl.append(averageRatingEl, addReviewButton);
-
   return reviewSummaryEl;
 };
 
@@ -112,7 +110,6 @@ const renderReviewList = async (product) => {
   const ul = document.createElement("ul");
 
   reviewsSection.append(ratingSummaryEl, divider, reviewsHeading, ul);
-
   reviews.map(toReviewListItem).forEach((li) => ul.appendChild(li));
 };
 
