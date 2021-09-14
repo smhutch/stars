@@ -38,5 +38,12 @@ describe(getAverageRating, () => {
     // This value doesn't need to confirm to the valid ratings above
     expect(getAverageRating([1, 1, 2, 4, 5])).toBe(2.6);
     expect(getAverageRating([1, 1, 3, 3, 3, 5, 5, 5])).toBe(3.25);
+    expect(getAverageRating([1, 1, 3, 3, 3, 5, 5, 5])).toBe(3.25);
+    expect(getAverageRating([1, 1, 3, 3, 3, 5, 5, 5])).toBe(3.25);
+  });
+
+  it("handles floating values", () => {
+    const floatingRoundingError = 0.1 + 0.2; // 0.30000000004
+    expect(getAverageRating([floatingRoundingError])).toBe(0.3);
   });
 });

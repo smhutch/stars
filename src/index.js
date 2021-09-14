@@ -44,7 +44,7 @@ const toReviewListItem = ({ rating, review }) => {
  */
 const getAverageRatingEl = (rating) => {
   const wrapper = document.createElement("div");
-  wrapper.classList.add("flex", "align-center");
+  wrapper.classList.add("average-rating", "flex", "align-center");
 
   // Average rating
   const averageEl = document.createElement("span");
@@ -60,21 +60,49 @@ const getAverageRatingEl = (rating) => {
 
 /**
  * @param {number} rating
+ * @param {import("./products").Product} product
  * @returns {HTMLDivElement}
  */
-const getRatingSummaryEl = (rating) => {
+const getRatingSummaryEl = (rating, product) => {
   // Wrapper flexbox div
   const reviewSummaryEl = document.createElement("div");
-  reviewSummaryEl.classList.add("flex", "justify-between");
+  reviewSummaryEl.classList.add("rating-summary", "flex", "justify-between");
 
   const averageRatingEl = getAverageRatingEl(rating);
 
   const addReviewButton = document.createElement("button");
   addReviewButton.innerText = "Add Review";
-  addReviewButton.addEventListener("click", () => renderAddReviewDialog());
+  addReviewButton.addEventListener("click", () =>
+    renderAddReviewDialog(product.id, () => refreshReviewList(product))
+  );
 
   reviewSummaryEl.append(averageRatingEl, addReviewButton);
   return reviewSummaryEl;
+};
+
+/**
+ * Note: this refresh logic got quite messy. Time to introduce a Reactive library.
+ *
+ * @param {import("./products").Product} product
+ */
+const refreshReviewList = async (product) => {
+  const reviews = await getReviews(product.id);
+
+  /* Refresh list of reviews */
+  const ul = reviewsSection.querySelector("ul");
+  if (ul) {
+    clearElement(ul);
+    reviews.map(toReviewListItem).forEach((li) => ul.appendChild(li));
+  }
+
+  /* Refresh average rating */
+  const summaryEl = reviewsSection.querySelector(".rating-summary");
+  if (summaryEl) {
+    const averageRatingEl = summaryEl.querySelector(".average-rating");
+    const ratings = reviews.map((review) => review.rating);
+    const averageRating = getAverageRating(ratings);
+    averageRatingEl?.replaceWith(getAverageRatingEl(averageRating));
+  }
 };
 
 /**
@@ -100,7 +128,10 @@ const renderReviewList = async (product) => {
   }
 
   const ratings = reviews.map((review) => review.rating);
-  const ratingSummaryEl = getRatingSummaryEl(getAverageRating(ratings));
+  const ratingSummaryEl = getRatingSummaryEl(
+    getAverageRating(ratings),
+    product
+  );
 
   const divider = document.createElement("hr");
 

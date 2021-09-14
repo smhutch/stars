@@ -1,3 +1,4 @@
+import { createReview } from "./reviews";
 import { createStarInput, STAR_INPUT_NAME } from "./starInput";
 import { clearElement } from "./utils";
 
@@ -13,26 +14,31 @@ const REVIEW_INPUT_ID = "review-input";
 const REVIEW_NAME = "review";
 
 /**
- * @param {Event} event
+ * @param {string} productId
+ * @param {function} onAddReview
  */
-const handleAddReview = (event) => {
+const handleAddReview = (productId, onAddReview) => async (event) => {
   event.preventDefault();
-  const form = new FormData(event.target);
-  const rating = form.get(RATING_NAME);
-  const review = form.get(REVIEW_NAME);
+  /** @type {HTMLFormElement} */
+  const formEl = event.target;
+  const form = new FormData(formEl);
 
-  console.log({ rating, review });
-  // TODO: make request to add review to DB
-  // TODO: handle success response
-  // TODO: handle error response
+  await createReview(productId, {
+    rating: form.get(RATING_NAME),
+    review: form.get(REVIEW_NAME),
+  });
+  onAddReview();
+  formEl.reset();
 };
 
 /**
+ * @param {string} productId
+ * @param {function} onAddReview
  * @returns {HTMLFormElement}
  */
-const createAddReviewForm = () => {
+const createAddReviewForm = (productId, onAddReview) => {
   const form = document.createElement("form");
-  form.addEventListener("submit", handleAddReview);
+  form.addEventListener("submit", handleAddReview(productId, onAddReview));
 
   const formRow = document.createElement("div");
   formRow.classList.add("row");
@@ -77,11 +83,15 @@ const createAddReviewForm = () => {
   return form;
 };
 
-export const renderAddReviewDialog = () => {
+/**
+ * @param {string} productId
+ * @param {function} onAddReview
+ */
+export const renderAddReviewDialog = (productId, onAddReview) => {
   clearElement(addReviewContainer);
 
   const dialog = document.createElement("div");
-  dialog.setAttribute("role", "dialog");
+  dialog.setAttribute("role", "dsialog");
   dialog.setAttribute("aria-labelledby", HEADING_ID);
 
   const heading = document.createElement("h2");
@@ -89,7 +99,7 @@ export const renderAddReviewDialog = () => {
   heading.innerText = HEADING_TEXT;
   dialog.appendChild(heading);
 
-  const form = createAddReviewForm();
+  const form = createAddReviewForm(productId, onAddReview);
   dialog.appendChild(form);
 
   addReviewContainer.appendChild(dialog);

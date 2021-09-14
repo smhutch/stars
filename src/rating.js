@@ -40,5 +40,6 @@ export const getAverageRating = (ratings) => {
   const ratingsCount = ratings.length;
   const totalRating = ratings.reduce((acc, rating) => acc + rating, 0);
 
-  return totalRating / ratingsCount;
+  /** Fix floating point rounding errors */
+  return Number((totalRating / ratingsCount).toFixed(2));
 };
