@@ -1,5 +1,14 @@
 import React from "react";
+import { Stars } from "./Stars";
 
 export const Review = (props) => {
-  return <div>[Review]</div>;
+  return (
+    <>
+      <span className="review-stars">
+        <Stars rating={props.rating} />
+      </span>
+      <strong>{props.rating}</strong>
+      <span className="dim">, {props.review}</span>
+    </>
+  );
 };

@@ -48,7 +48,7 @@ export const ProductReviews = ({ id, name }) => {
         <>
           <hr />
           <h3>Reviews</h3>
-          <ReviewsList />
+          <ReviewsList reviews={productReviews.data} />
         </>
       )}
     </ProductReviewsSection>
