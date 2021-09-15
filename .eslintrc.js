@@ -4,6 +4,8 @@ module.exports = {
   },
   extends: [
     "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/strict",
     "plugin:jest/recommended",
     "plugin:jest/style",
   ],
@@ -33,6 +35,7 @@ module.exports = {
   },
   parserOptions: {
     ecmaVersion: 2020,
+    jsx: true,
     sourceType: "module",
   },
 };

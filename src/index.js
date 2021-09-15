@@ -1,9 +1,13 @@
+import React from "react";
+import { render } from "react-dom";
+
 import { clearElement } from "./utils";
 import { getProducts } from "./products";
 import { getReviews } from "./reviews";
 import { renderAddReviewDialog } from "./form";
 import { getStarsEl } from "./stars";
 import { enforceValidRating, getAverageRating } from "./rating";
+import { App } from "./components/App";
 
 const productsSection = document.getElementById("products");
 if (!productsSection) {
@@ -178,3 +182,6 @@ const init = () => {
 };
 
 init();
+
+const root = document.getElementById("app");
+render(<App />, root);

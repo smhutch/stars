@@ -6,4 +6,8 @@ esbuild.build({
   entryPoints: [config.JS_SRC],
   outfile: "www/app.js",
   bundle: true,
+  loader: {
+    ".js": "jsx",
+    ".jsx": "jsx",
+  },
 });
