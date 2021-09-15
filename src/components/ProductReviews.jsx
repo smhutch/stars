@@ -1,5 +1,7 @@
 import React from "react";
 import { useProductReviewsList } from "../hooks/useProductReviewsList";
+import { getAverageRating } from "../rating";
+import { AverageRating } from "./AverageRating";
 
 const ProductReviewsSection = ({ children, title }) => {
   return (
@@ -31,15 +33,25 @@ export const ProductReviews = ({ id, name }) => {
 
   return (
     <ProductReviewsSection title={name}>
-      <div className="flex justify-between">
-        <div>[Stars]</div>
+      <div className="review-summary flex justify-between align-center">
+        {!productReviews.data || productReviews.data.length < 1 ? (
+          <p className="dim">No reviews yet</p>
+        ) : (
+          <AverageRating
+            ratings={productReviews.data.map((review) => review.rating)}
+          />
+        )}
         <button>Add Review</button>
       </div>
-      <hr />
-      <h3>Reviews</h3>
-      <ul>
-        <li>[Review]</li>
-      </ul>
+      {productReviews.data && (
+        <>
+          <hr />
+          <h3>Reviews</h3>
+          <ul>
+            <li>[Review]</li>
+          </ul>
+        </>
+      )}
     </ProductReviewsSection>
   );
 };

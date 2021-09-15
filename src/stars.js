@@ -8,6 +8,7 @@ import { RATING_MAX } from "./rating";
 const VIEWBOX = 329.942;
 const VIEWBOX_X = VIEWBOX;
 const VIEWBOX_Y = VIEWBOX;
+export const VIEWBOX_COORDS = `0 0 ${VIEWBOX} ${VIEWBOX}`;
 
 const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
 const STAR_PATH_ID = "star-path";
@@ -15,7 +16,7 @@ const STAR_PATH_ID = "star-path";
 /**
  * @typedef {keyof typeof starFillIdMap} StarFill
  */
-const starFillIdMap = {
+export const starFillIdMap = {
   empty: "star-empty",
   full: "star-full",
 };

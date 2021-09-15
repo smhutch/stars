@@ -207,7 +207,7 @@ button.link:hover {
 /*
 * === Review summary ===
 */
-.review-summary-average-rating {
+.review-summary .average-rating {
   font-size: 2rem;
   margin-right: var(--space-4);
 }
