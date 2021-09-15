@@ -103,4 +103,5 @@ export const renderAddReviewDialog = (productId, onAddReview) => {
   dialog.appendChild(form);
 
   addReviewContainer.appendChild(dialog);
+  addReviewContainer?.scrollIntoView({ behavior: "smooth" });
 };
