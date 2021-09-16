@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useState } from "react";
 import { createReview } from "../reviews";
 
 const inputs = {
@@ -12,39 +12,13 @@ const inputs = {
   },
 };
 
-const reducer = (state = {}, action) => {
-  switch (action.type) {
-    case "SET_SUBMITTING":
-      return {
-        ...state,
-        state: "SUBMITTING",
-      };
-    case "SET_ERROR":
-      return {
-        ...state,
-        state: "ERROR",
-        error: action.error,
-      };
-    case "SET_SUBMITTED":
-      return {
-        ...state,
-        state: "SUBMITTED",
-        error: null,
-      };
-    default:
-      return state;
-  }
-};
-
 export const AddReviewForm = ({ onSuccess, productId }) => {
-  const [{ error, state }, dispatch] = useReducer(reducer, {
-    state: "IDLE",
-    error: null,
-  });
+  const [status, setStatus] = useState("IDLE");
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    dispatch({ type: "SUBMIT" });
+    setStatus("SUBMITTING");
+
     const formEl = event.target;
     const form = new FormData(formEl);
 
@@ -55,15 +29,15 @@ export const AddReviewForm = ({ onSuccess, productId }) => {
       });
       formEl.reset();
       onSuccess();
-      dispatch({ type: "SET_SUBMITTED" });
+      setStatus("SUBMITTED");
     } catch (error) {
-      dispatch({ type: "SET_ERROR", error });
+      setStatus("ERROR");
     }
   };
 
   return (
     <form onSubmit={onSubmit}>
-      {state === "ERROR" && (
+      {status === "ERROR" && (
         <div className="row error-message">Failed to add review</div>
       )}
       <div className="row">
@@ -80,7 +54,7 @@ export const AddReviewForm = ({ onSuccess, productId }) => {
           type="text"
         />
       </div>
-      <button disabled={state === "SUBMITTING"} type="submit">
+      <button disabled={status === "SUBMITTING"} type="submit">
         Submit review
       </button>
     </form>
