@@ -1,4 +1,5 @@
 :root {
+  --color-error: #d34343;
   --color-primary: #127e83;
   --color-line: #dddddd;
   --color-shadow: #dddddd;
@@ -14,6 +15,12 @@
   --space-4: 16px;
   --space-5: 20px;
   --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  /* Layered box shadow. A bit smoother than a single shadow. */
+  --shadow-raised: 0 4px 2px rgba(0, 0, 0, 0.04), 0 8px 4px rgba(0, 0, 0, 0.04),
+    0 16px 8px rgba(0, 0, 0, 0.04), 0 32px 16px rgba(0, 0, 0, 0.04),
+    0 32px 32px rgba(0, 0, 0, 0.01), 0px -16px 32px rgba(0, 0, 0, 0.04);
 }
 
 /*
@@ -24,6 +31,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui,
     helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
   margin: 0;
+  min-height: 100vh;
 }
 
 * {
@@ -111,8 +119,15 @@ button {
   color: var(--text-dim);
   font-weight: 600;
   padding: var(--space-2) var(--space-4);
-
   transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+button:disabled:hover {
+  box-shadow: none;
 }
 
 button:hover {
@@ -217,4 +232,35 @@ button.link:hover {
 */
 .review-stars {
   margin-right: var(--space-4);
+}
+
+/*
+* === Dialog (radix-ui) ===
+*/
+
+.dialog-content {
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: var(--shadow-raised);
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 450px;
+  max-height: 85vh;
+  padding: var(--space-8);
+}
+
+.dialog-overlay {
+  background-color: #ffffff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  opacity: 0.8;
 }

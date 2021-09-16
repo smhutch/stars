@@ -1,6 +1,7 @@
 import React from "react";
 import { useProductReviewsList } from "../hooks/useProductReviewsList";
 import { getAverageRating } from "../rating";
+import { AddReviewDialog } from "./AddReviewDialog";
 import { AverageRating } from "./AverageRating";
 import { ReviewsList } from "./ReviewsList";
 
@@ -42,7 +43,7 @@ export const ProductReviews = ({ id, name }) => {
         ) : (
           <p className="dim">No reviews yet</p>
         )}
-        <button>Add Review</button>
+        <AddReviewDialog productId={id} trigger="Add review" />
       </div>
       {productReviews.data && productReviews.data.length > 0 && (
         <>

@@ -47,12 +47,12 @@ export const createReview = async (productId, review) => {
       .insert([{ product_id: productId, ...review }]);
     if (result.error) {
       console.error(result.error.message);
-      return new Error(result.error.message);
+      throw new Error(result.error.message);
     }
 
     return result.data;
   } catch (error) {
     console.error(error);
-    return new Error(error.message);
+    throw new Error(error.message);
   }
 };
