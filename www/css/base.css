@@ -191,8 +191,8 @@ button.link:hover {
   padding: var(--space-1);
 }
 
-.star-input svg use {
-  color: var(--star-empty);
+.star-input:focus-within svg use {
+  fill: var(--star-empty);
 }
 
 /* When hovering over the star row, all stars should appear full */
@@ -200,7 +200,8 @@ button.link:hover {
   fill: var(--star-full);
 }
 
-/* All stars after the hovered one should appear empty */
+/* All stars after the hovered or focused one should appear empty */
+.star-input:focus-within .star-input-option:focus ~ .star-input-option svg use,
 .star-input .star-input-option:hover ~ .star-input-option svg use {
   fill: var(--star-empty);
 }

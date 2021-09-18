@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { createReview } from "../reviews";
+import { StarInput } from "./StarInput";
 
 const inputs = {
   rating: {
@@ -42,7 +43,7 @@ export const AddReviewForm = ({ onSuccess, productId }) => {
       )}
       <div className="row">
         <label htmlFor={inputs.rating.id}>Rating</label>
-        [STAR INPUT]
+        <StarInput id="add-review-star-input" />
       </div>
       <div className="row">
         <label htmlFor={inputs.review.id}>Review</label>
