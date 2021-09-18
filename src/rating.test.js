@@ -17,12 +17,14 @@ describe(enforceValidRating, () => {
     expect(enforceValidRating(100)).toBe(RATING_MAX);
   });
 
-  it("handles ratings that don't conform to RATING_STEP", () => {
+  it("handles ratings that don't round to [0,0.5,1]", () => {
     expect(enforceValidRating(0.1)).toBe(0);
-    expect(enforceValidRating(1.49)).toBe(1);
-    expect(enforceValidRating(1.5)).toBe(2);
-    expect(enforceValidRating(1.51)).toBe(2);
-    expect(enforceValidRating(4.5)).toBe(5);
+    expect(enforceValidRating(1.24)).toBe(1);
+    expect(enforceValidRating(1.49)).toBe(1.5);
+    expect(enforceValidRating(1.5)).toBe(1.5);
+    expect(enforceValidRating(1.51)).toBe(1.5);
+    expect(enforceValidRating(1.75)).toBe(2);
+    expect(enforceValidRating(4.5)).toBe(4.5);
     expect(enforceValidRating(4.9)).toBe(5);
   });
 });

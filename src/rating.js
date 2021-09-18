@@ -1,6 +1,5 @@
 export const RATING_MAX = 5;
 export const RATING_MIN = 0;
-export const RATING_STEP = 1;
 
 /**
  * In practice this should not be necessary on the frontend because we also
@@ -19,13 +18,20 @@ export const enforceValidRating = (rating) => {
     return RATING_MAX;
   }
 
-  const remainder = rating % RATING_STEP;
-  if (remainder !== 0) {
-    if (remainder < RATING_STEP / 2) {
+  const percentage = rating % 1;
+  if (percentage !== 0) {
+    // Round down when less than 0.25
+    if (percentage < 0.25) {
       return Math.floor(rating);
-    } else {
-      return Math.ceil(rating);
     }
+
+    // Round to 0.5 when between 0.25 and 0.75
+    if (percentage < 0.75) {
+      return Math.floor(rating) + 0.5;
+    }
+
+    // Round up when more than 0.75
+    return Math.ceil(rating);
   }
 
   return rating;
