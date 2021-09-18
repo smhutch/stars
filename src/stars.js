@@ -18,6 +18,7 @@ const STAR_PATH_ID = "star-path";
  */
 export const starFillIdMap = {
   empty: "star-empty",
+  half: "star-half",
   full: "star-full",
 };
 
@@ -73,9 +74,21 @@ export const getStarFillsForRating = (rating) => {
     */
     if (rating < star && rating > star - 1) {
       const percentage = rating - star + 1;
-      const closestInteger = Math.round(percentage);
+      // Multiplied by 2 to create three possible values [0,1,2]
+      // These values correspond to the three possible states of the star [empty, half, full]
+      const closestInteger = Math.round(percentage * 2);
 
-      stars.push(closestInteger === 0 ? "empty" : "full");
+      switch (closestInteger) {
+        case 0:
+          stars.push("empty");
+          break;
+        case 1:
+          stars.push("half");
+          break;
+        case 2:
+          stars.push("full");
+      }
+
       continue;
     }
 
