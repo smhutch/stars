@@ -1,6 +1,5 @@
 import React from "react";
 import { useProductReviewsList } from "../hooks/useProductReviewsList";
-import { getAverageRating } from "../rating";
 import { AddReviewDialog } from "./AddReviewDialog";
 import { AverageRating } from "./AverageRating";
 import { ReviewsList } from "./ReviewsList";
