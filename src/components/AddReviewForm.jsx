@@ -29,8 +29,8 @@ export const AddReviewForm = ({ onSuccess, productId }) => {
         review: form.get(inputs.review.name),
       });
       formEl.reset();
-      onSuccess();
       setStatus("SUBMITTED");
+      onSuccess();
     } catch (error) {
       setStatus("ERROR");
     }
