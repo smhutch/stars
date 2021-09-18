@@ -32,6 +32,7 @@ module.exports = {
     ],
     // Always use a single describe block.
     "jest/require-top-level-describe": "error",
+    "react/prop-types": "off",
   },
   parserOptions: {
     ecmaVersion: 2020,
