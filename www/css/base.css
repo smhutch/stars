@@ -176,6 +176,11 @@ button.link:hover {
   margin-right: var(--space-1);
 }
 
+.star-half {
+  width: 14px;
+  height: 28px;
+}
+
 /*
 * === Star input ===
 */
@@ -189,6 +194,14 @@ button.link:hover {
 
 .star-input svg {
   padding: var(--space-1);
+}
+
+.star-input-option-left svg {
+  padding-right: 0;
+}
+
+.star-input-option-right svg {
+  padding-left: 0;
 }
 
 .star-input:focus-within svg use {
