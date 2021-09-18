@@ -2,8 +2,15 @@ import { useEffect, useState } from "react";
 import { getProductReviews } from "../supabase/productReviews";
 import { supabase } from "../supabase";
 
+// Minimal in-memory cache to avoid too many loading states when
+// changing between product pages
+let productReviewsListCache = {};
+
 export const useProductReviewsList = (productId) => {
-  const [productReviewsList, setProductReviewsList] = useState(null);
+  const [productReviewsList, setProductReviewsList] = useState(
+    // Initialize with product reviews from cache where possible
+    productReviewsListCache[productId] || null
+  );
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -29,6 +36,11 @@ export const useProductReviewsList = (productId) => {
       supabase.removeSubscription(reviewSubscription);
     };
   }, [productId]);
+
+  useEffect(() => {
+    // Whenever productReviewsList changes, update the cache
+    productReviewsListCache[productId] = productReviewsList;
+  }, [productReviewsList]);
 
   return {
     data: productReviewsList,
