@@ -1,5 +1,5 @@
 import React from "react";
-import { getStarFillsForRating } from "../stars";
+import { getStarFillsForRating } from "../common/stars";
 import { Star } from "./Star";
 
 export const Stars = ({ rating }) => {

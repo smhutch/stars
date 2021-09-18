@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getProducts } from "../products";
+import { getProducts } from "../supabase/products";
 import { supabase } from "../supabase";
 
 export const useProductsList = () => {

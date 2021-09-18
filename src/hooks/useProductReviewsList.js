@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getReviews } from "../reviews";
+import { getProductReviews } from "../supabase/productReviews";
 import { supabase } from "../supabase";
 
 export const useProductReviewsList = (productId) => {
@@ -7,8 +7,7 @@ export const useProductReviewsList = (productId) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Get product reviews
-    getReviews(productId)
+    getProductReviews(productId)
       .then((reviews) => {
         setProductReviewsList(reviews);
       })

@@ -1,4 +1,4 @@
-import { supabase } from "./supabase";
+import { supabase } from "./";
 
 const REVIEWS_TABLE = "product_reviews";
 
@@ -11,7 +11,7 @@ const REVIEWS_TABLE = "product_reviews";
  * @param {string} productId
  * @returns {Promise<Review[]>}
  */
-export const getReviews = async (productId) => {
+export const getProductReviews = async (productId) => {
   try {
     const result = await supabase
       .from(REVIEWS_TABLE)
@@ -39,7 +39,7 @@ export const getReviews = async (productId) => {
  * @param {NewReview} review
  * @returns {Promise<Error>}
  */
-export const createReview = async (productId, review) => {
+export const createProductReview = async (productId, review) => {
   try {
     const result = await supabase
       .from(REVIEWS_TABLE)

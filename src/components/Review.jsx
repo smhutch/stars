@@ -1,5 +1,5 @@
 import React from "react";
-import { enforceValidRating } from "../rating";
+import { enforceValidRating } from "../common/rating";
 import { Stars } from "./Stars";
 
 export const Review = (props) => {

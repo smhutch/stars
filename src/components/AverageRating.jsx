@@ -1,5 +1,5 @@
 import React from "react";
-import { getAverageRating } from "../rating";
+import { getAverageRating } from "../common/rating";
 import { Stars } from "./Stars";
 
 export const AverageRating = ({ ratings }) => {

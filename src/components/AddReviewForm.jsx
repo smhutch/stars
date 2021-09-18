@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createReview } from "../reviews";
+import { createProductReview } from "../supabase/productReviews";
 import { StarInput } from "./StarInput";
 
 const inputs = {
@@ -24,7 +24,7 @@ export const AddReviewForm = ({ onSuccess, productId }) => {
     const form = new FormData(formEl);
 
     try {
-      await createReview(productId, {
+      await createProductReview(productId, {
         rating: form.get(inputs.rating.name),
         review: form.get(inputs.review.name),
       });
