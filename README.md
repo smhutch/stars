@@ -5,7 +5,8 @@ A [Supabase](https://supabase.io/) demo.
 ## Stack
 
 - DB: [Supabase](https://supabase.io/)
-- App: Plain JS
+- UI: [React](https://reactjs.org/)
+- Styling: Vanilla CSS ✨
 
 ## Tooling
 
