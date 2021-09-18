@@ -17,7 +17,7 @@ const ProductReviewsSection = ({ children, title }) => {
 export const ProductReviews = ({ id, name }) => {
   const productReviews = useProductReviewsList(id);
 
-  if (!productReviews.data && productReviews.isValidating) {
+  if (!productReviews.data) {
     return (
       <ProductReviewsSection title={name}>
         <p className="dim">Loading reviews</p>

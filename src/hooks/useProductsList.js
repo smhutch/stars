@@ -3,7 +3,7 @@ import { getProducts } from "../products";
 import { supabase } from "../supabase";
 
 export const useProductsList = () => {
-  const [productsList, setProductsList] = useState([]);
+  const [productsList, setProductsList] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -20,7 +20,9 @@ export const useProductsList = () => {
     const productSubscription = supabase
       .from("products")
       .on("INSERT", (payload) => {
-        setProductsList((list) => list.concat(payload.new));
+        setProductsList((list) =>
+          Array.isArray(list) ? list.concat(payload.new) : [payload.new]
+        );
       })
       .subscribe();
 

@@ -4,7 +4,7 @@ import { useProductsList } from "../hooks/useProductsList";
 export const ProductsList = ({ onSelectProduct }) => {
   const productsList = useProductsList();
 
-  if (!productsList.data && productsList.isValidating) {
+  if (!productsList.data) {
     return <p className="dim">Loading products</p>;
   }
 
@@ -12,7 +12,7 @@ export const ProductsList = ({ onSelectProduct }) => {
     return <p className="dim">Failed to fetch products</p>;
   }
 
-  if (!productsList.data) {
+  if (productsList.data.length === 0) {
     return <p className="dim">No products found</p>;
   }
 

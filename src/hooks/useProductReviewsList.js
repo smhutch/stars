@@ -3,7 +3,7 @@ import { getReviews } from "../reviews";
 import { supabase } from "../supabase";
 
 export const useProductReviewsList = (productId) => {
-  const [productReviewsList, setProductReviewsList] = useState([]);
+  const [productReviewsList, setProductReviewsList] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -20,7 +20,9 @@ export const useProductReviewsList = (productId) => {
     const reviewSubscription = supabase
       .from("product_reviews")
       .on("INSERT", (payload) => {
-        setProductReviewsList((list) => list.concat(payload.new));
+        setProductReviewsList((list) =>
+          Array.isArray(list) ? list.concat(payload.new) : [payload.new]
+        );
       })
       .subscribe();
 
