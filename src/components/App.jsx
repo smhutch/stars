@@ -14,7 +14,7 @@ export const App = () => {
       {activeProduct && (
         <>
           <hr />
-          <ProductReviews {...activeProduct} />
+          <ProductReviews key={activeProduct.id} {...activeProduct} />
         </>
       )}
     </>
