@@ -1,13 +1,16 @@
 import React from "react";
+import { enforceValidRating } from "../rating";
 import { Stars } from "./Stars";
 
 export const Review = (props) => {
+  const rating = enforceValidRating(props.rating);
+
   return (
     <>
       <span className="review-stars">
-        <Stars rating={props.rating} />
+        <Stars rating={rating} />
       </span>
-      <strong>{props.rating}</strong>
+      <strong>{rating}</strong>
       <span className="dim">, {props.review}</span>
     </>
   );
