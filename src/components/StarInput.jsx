@@ -15,6 +15,7 @@ const HiddenRadioInput = ({ checked, className, id, onChange, value }) => {
       onChange={onChange}
       type="radio"
       value={value}
+      required
     />
   );
 };
@@ -23,11 +24,11 @@ const StarInputOption = ({ checked, id, onSelect, selected, value }) => {
   return (
     <div className="star-input-option">
       <HiddenRadioInput
-        className={selected ? "selected" : ""}
         checked={checked}
+        className={selected ? "selected" : ""}
         id={id}
-        value={value}
         onChange={onSelect}
+        value={value}
       />
       <label htmlFor={id}>
         <span className="visually-hidden">
