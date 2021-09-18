@@ -1,6 +1,5 @@
 import { supabase } from "./supabase";
 
-// TODO: in memory cache
 const REVIEWS_TABLE = "product_reviews";
 
 /**

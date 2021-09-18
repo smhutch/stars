@@ -1,7 +1,5 @@
 import { supabase } from "./supabase";
 
-// TODO: in memory cache
-
 /**
  * @typedef {Object} Product
  * @property {string} id

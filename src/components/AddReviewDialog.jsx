@@ -7,10 +7,6 @@ import { AddReviewForm } from "./AddReviewForm";
 import { Dialog } from "./Dialog";
 import { useControlledDialog } from "../hooks/useControlledDialog";
 
-// TODO: Submitting state
-// TODO: Close modal when succeeded
-// TODO: Error state
-
 export const AddReviewDialog = ({ productId, trigger }) => {
   const { isOpen, open, close } = useControlledDialog({
     isInitiallyOpen: false,
